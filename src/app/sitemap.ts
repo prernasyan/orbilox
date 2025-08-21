@@ -3,7 +3,7 @@ import { MetadataRoute } from "next";
 import { MarketplaceQueries } from "@/lib/queries";
 
 const SITE_CONFIG = {
-  baseUrl: process.env.NEXT_PUBLIC_BASE_URL || "https://markorbit.vercel.app/",
+  baseUrl: process.env.NEXT_PUBLIC_BASE_URL || "https://orbilox.com",
   defaultChangeFreq: "weekly" as const,
   defaultPriority: 0.8,
 };

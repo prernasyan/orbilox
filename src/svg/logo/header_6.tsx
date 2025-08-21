@@ -2,87 +2,143 @@ const HeaderSixLogo = () => {
   return (
     <>
       <svg
-        width="280"
-        height="60"
-        viewBox="0 0 280 60"
-        fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 300 80"
+        width="300"
+        height="80"
       >
-        {/* <!-- Orbital Ring Background --> */}
-        <circle
-          cx="30"
-          cy="30"
-          r="25"
-          fill="none"
-          stroke="#FF6B35"
-          strokeWidth="2"
-          opacity="0.3"
-        />
-        <circle
-          cx="30"
-          cy="30"
-          r="20"
-          fill="none"
-          stroke="#FF6B35"
-          strokeWidth="1.5"
-          opacity="0.5"
-        />
+        {/* Background gradient definition */}
+        <defs>
+          <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#1e40af" stopOpacity={1} />
+            <stop offset="50%" stopColor="#3b82f6" stopOpacity={1} />
+            <stop offset="100%" stopColor="#f97316" stopOpacity={1} />
+          </linearGradient>
+          <linearGradient
+            id="orbitGradient"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="100%"
+          >
+            <stop offset="0%" stopColor="#2563eb" stopOpacity={0.8} />
+            <stop offset="100%" stopColor="#ea580c" stopOpacity={0.6} />
+          </linearGradient>
+        </defs>
 
-        {/* <!-- Central Orb --> */}
-        <circle cx="30" cy="30" r="8" fill="#FF6B35" />
-        <circle cx="30" cy="30" r="6" fill="#FF8A65" />
+        {/* Orbital rings */}
+        <g transform="translate(40,40)">
+          {/* Outer orbit */}
+          <ellipse
+            cx="0"
+            cy="0"
+            rx="25"
+            ry="8"
+            fill="none"
+            stroke="url(#orbitGradient)"
+            strokeWidth="2"
+            opacity="0.7"
+          >
+            <animateTransform
+              attributeName="transform"
+              type="rotate"
+              values="0;360"
+              dur="8s"
+              repeatCount="indefinite"
+            />
+          </ellipse>
 
-        {/* <!-- Orbiting Elements --> */}
-        <circle cx="50" cy="20" r="3" fill="#FF6B35">
-          <animateTransform
-            attributeName="transform"
-            type="rotate"
-            values="0 30 30;360 30 30"
-            dur="10s"
-            repeatCount="indefinite"
-          />
-        </circle>
-        <circle cx="15" cy="45" r="2" fill="#FF8A65">
-          <animateTransform
-            attributeName="transform"
-            type="rotate"
-            values="0 30 30;360 30 30"
-            dur="8s"
-            repeatCount="indefinite"
-          />
-        </circle>
+          {/* Middle orbit */}
+          <ellipse
+            cx="0"
+            cy="0"
+            rx="18"
+            ry="6"
+            fill="none"
+            stroke="url(#orbitGradient)"
+            strokeWidth="1.5"
+            opacity="0.8"
+          >
+            <animateTransform
+              attributeName="transform"
+              type="rotate"
+              values="360;0"
+              dur="6s"
+              repeatCount="indefinite"
+            />
+          </ellipse>
 
-        {/* <!-- Text --> */}
+          {/* Inner orbit */}
+          <ellipse
+            cx="0"
+            cy="0"
+            rx="12"
+            ry="4"
+            fill="none"
+            stroke="url(#orbitGradient)"
+            strokeWidth="1"
+            opacity="0.9"
+          >
+            <animateTransform
+              attributeName="transform"
+              type="rotate"
+              values="0;360"
+              dur="4s"
+              repeatCount="indefinite"
+            />
+          </ellipse>
+
+          {/* Central core */}
+          <circle cx="0" cy="0" r="4" fill="url(#textGradient)">
+            <animate
+              attributeName="r"
+              values="3.5;4.5;3.5"
+              dur="2s"
+              repeatCount="indefinite"
+            />
+          </circle>
+
+          {/* Orbiting particles */}
+          <circle cx="22" cy="0" r="2" fill="#2563eb" opacity="0.8">
+            <animateTransform
+              attributeName="transform"
+              type="rotate"
+              values="0;360"
+              dur="8s"
+              repeatCount="indefinite"
+            />
+          </circle>
+          <circle cx="-15" cy="0" r="1.5" fill="#ea580c" opacity="0.7">
+            <animateTransform
+              attributeName="transform"
+              type="rotate"
+              values="360;0"
+              dur="6s"
+              repeatCount="indefinite"
+            />
+          </circle>
+        </g>
+
+        {/* Text */}
         <text
-          x="70"
-          y="25"
+          x="65"
+          y="50"
           fontFamily="Arial, sans-serif"
-          fontSize="24"
+          fontSize="28"
           fontWeight="bold"
-          fill="#2D3748"
+          fill="url(#textGradient)"
         >
-          MARK
-        </text>
-        <text
-          x="70"
-          y="45"
-          fontFamily="Arial, sans-serif"
-          fontSize="24"
-          fontWeight="bold"
-          fill="#FF6B35"
-        >
-          ORBIT
+          ORBILOX
         </text>
 
-        {/* <!-- Connecting Line --> */}
-        <line
-          x1="55"
-          y1="30"
-          x2="70"
-          y2="30"
-          stroke="#E2E8F0"
-          strokeWidth="2"
-        />
+        {/* Subtle glow effect */}
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+          <feMerge>
+            <feMergeNode in="coloredBlur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
       </svg>
     </>
   );
